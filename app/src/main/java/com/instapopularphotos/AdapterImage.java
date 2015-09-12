@@ -1,7 +1,12 @@
 package com.instapopularphotos;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +61,7 @@ public class AdapterImage extends ArrayAdapter<ModelImage> {
         viewHolder.ivProfile.setImageResource(0);
 
         Picasso.with(getContext()).load(image.getImgURL()).into(viewHolder.ivPhoto);
-        Picasso.with(getContext()).load(image.getProfilePhotoURL()).into(viewHolder.ivProfile);
+        Picasso.with(getContext()).load(image.getProfilePhotoURL()).transform(new CircleTransform()).into(viewHolder.ivProfile);
         return convertView;
     }
 }
