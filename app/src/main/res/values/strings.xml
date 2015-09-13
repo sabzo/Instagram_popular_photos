@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">PopularPhotos</string>
+    <string name="app_name">IG</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 </resources>
