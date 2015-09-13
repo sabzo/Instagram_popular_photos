@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class ActivityPopularPhotos extends Activity {
     // ClientID currently viewable in Git, need a better solution
     // Or remotely fetch it
-    public static final String CLIENT_ID = "64c4e52c95e548308b65a5cf1d9086e6";
+    public static final String CLIENT_ID = "client-id";
     // ArrayListImage
     ArrayList<ModelImage> images = null;
     // Adapter
@@ -84,8 +84,20 @@ public class ActivityPopularPhotos extends Activity {
                                 String username = photo.getJSONObject("user").getString("username");
                                 Integer imgHeight = photo.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
                                 Integer likes = photo.getJSONObject("likes").getInt("count");
-                                ModelImage image = new ModelImage(username, profileImageURL, imgURL, caption, likes, imgHeight);
-                                images.add(image);
+                                JSONArray jsonComments = photo.getJSONObject("comments").getJSONArray("data");
+                                Integer count = photo.getJSONObject("comments").getInt("count");
+                                ArrayList<String> comments = new ArrayList<String>();
+
+
+                                if( count >= 2) {
+                                    for(int j = 1; j <= 2; j++) {
+                                        comments.add(jsonComments.getJSONObject(j).getString("text") );
+                                    }
+                                } else if(count == 1) {
+                                    comments.add(jsonComments.getJSONObject(0).getString("text") );
+                                }
+                                ModelImage image = new ModelImage(username, profileImageURL, imgURL, caption, likes, imgHeight, comments);
+                                    images.add(image);
                             }
                             refreshLayout.setRefreshing(false);
 

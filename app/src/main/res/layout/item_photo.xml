@@ -8,16 +8,28 @@
         android:id="@+id/ivProfile"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvUsername"
+        android:layout_toRightOf="@+id/ivProfile"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"/>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ivPhoto"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
         android:layout_below="@+id/ivProfile"
-        android:layout_alignLeft="@+id/ivProfile"
-         />
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"/>
 
     <TextView
         android:id="@+id/tvLikes"
@@ -25,7 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivPhoto"
         android:layout_alignLeft="@+id/ivPhoto"
-
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         />
     <TextView
         android:layout_width="match_parent"
@@ -33,7 +46,24 @@
         android:id="@+id/tvCaption"
         android:layout_below="@+id/tvLikes"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/llComments"
+        android:layout_below="@id/tvCaption"
+        android:layout_alignLeft="@id/tvCaption"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp">
+    </LinearLayout>
+
+
+
 
 
 </RelativeLayout>
