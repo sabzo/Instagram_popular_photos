@@ -23,11 +23,8 @@ public class ActivityPopularPhotos extends AppCompatActivity {
     // ClientID currently viewable in Git, need a better solution Or remotely fetch it
     // If CLIENT_ID is still in Git, just know I've already disabled it (for security reasons)
     public static final String CLIENT_ID = "";
-    // ArrayListImage
     ArrayList<ModelImage> images = null;
-    // Adapter
     AdapterImage adapterImage = null;
-    //swr
     SwipeRefreshLayout refreshLayout = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +33,6 @@ public class ActivityPopularPhotos extends AppCompatActivity {
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Popular Photos!");
-        // Add Icon to Appbar
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setLogo(R.drawable.ic_action_name);
         actionBar.setDisplayUseLogoEnabled(true);
