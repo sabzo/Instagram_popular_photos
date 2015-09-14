@@ -20,11 +20,20 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="5dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvCreated"
+        android:layout_alignRight="@+id/tvUsername"
+        android:layout_alignTop="@+id/tvUsername"
+        android:layout_marginRight="10dp"
+        />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ivPhoto"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:layout_below="@+id/ivProfile"
         android:layout_marginTop="10dp"

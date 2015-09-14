@@ -1,7 +1,5 @@
 package com.instapopularphotos.ui.mainscreen;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

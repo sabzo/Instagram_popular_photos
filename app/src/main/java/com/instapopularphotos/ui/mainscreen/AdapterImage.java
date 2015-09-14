@@ -14,7 +14,9 @@ import com.instapopularphotos.photo_transform.CircleTransform;
 import com.instapopularphotos.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by sabelo on 9/10/15.
@@ -25,6 +27,7 @@ public class AdapterImage extends ArrayAdapter<ModelImage> {
         TextView tvCaption = null;
         TextView tvLikes = null;
         TextView tvUsername = null;
+        TextView tvCreated = null;
         LinearLayout llComments = null;
         ImageView ivPhoto= null;
         ImageView ivProfile = null;
@@ -36,7 +39,6 @@ public class AdapterImage extends ArrayAdapter<ModelImage> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         // Get the an image at a certain position from the source data array
         ModelImage image = getItem(position);
 
@@ -48,6 +50,7 @@ public class AdapterImage extends ArrayAdapter<ModelImage> {
             viewHolder.tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
             viewHolder.tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
             viewHolder.tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
+            viewHolder.tvCreated = (TextView) convertView.findViewById(R.id.tvCreated);
             viewHolder.llComments = (LinearLayout) convertView.findViewById(R.id.llComments);
             viewHolder.ivPhoto= (ImageView) convertView.findViewById(R.id.ivPhoto);
             viewHolder.ivProfile = (ImageView) convertView.findViewById(R.id.ivProfile);
@@ -58,20 +61,21 @@ public class AdapterImage extends ArrayAdapter<ModelImage> {
         }
 
         viewHolder.tvUsername.setText(Html.fromHtml("<b>" + image.getUsername() +"</b>"));
-        viewHolder.tvCaption.setText(Html.fromHtml( "<b>" + image.getUsername() + "</b>  " + image.getCaption() ));
+        viewHolder.tvCreated.setText(image.getCreated_time());
+        viewHolder.tvCaption.setText(Html.fromHtml("<b>" + image.getUsername() + "</b>  " + image.getCaption()));
         viewHolder.llComments.removeAllViews();
         for(ModelImage.Comment x: image.getComments()) {
             TextView tvComment = new TextView(getContext());
             tvComment.setText(Html.fromHtml( "<b>" + x.getUsername() + "</b>" + "  " + x.getCommentString() ));
             viewHolder.llComments.addView(tvComment);
         }
-        String formmatedLikes = "<b><font color='blue'>" + image.getLikes().toString() + " likes" + "</font></b>";
+        String formmatedLikes = "<b><font color='blue'>" + NumberFormat.getNumberInstance(Locale.US).format( image.getLikes() ).toString() + " likes" + "</font></b>";
         viewHolder.tvLikes.setText(Html.fromHtml(formmatedLikes));
         viewHolder.ivPhoto.setImageResource(0);
         viewHolder.ivProfile.setImageResource(0);
 
-        Picasso.with(getContext()).load(image.getImgURL()).into(viewHolder.ivPhoto);
-        Picasso.with(getContext()).load(image.getProfilePhotoURL()).transform(new CircleTransform()).into(viewHolder.ivProfile);
+        Picasso.with(getContext()).load(image.getImgURL()).placeholder(R.drawable.iv_place_holder).into(viewHolder.ivPhoto);
+        Picasso.with(getContext()).load(image.getProfilePhotoURL()).placeholder(R.drawable.iv_place_holder).transform(new CircleTransform()).into(viewHolder.ivProfile);
         return convertView;
     }
 }

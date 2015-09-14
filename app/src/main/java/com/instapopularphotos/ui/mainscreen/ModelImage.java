@@ -1,5 +1,6 @@
 package com.instapopularphotos.ui.mainscreen;
 
+import android.text.format.DateUtils;
 import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,16 +32,15 @@ public class ModelImage {
         public String getCommentString() {
             return commentString;
         }
-
     }
+
     private String username, profilePhotoURL, imgURL, caption  = null;
     private Integer likes, imgHeight = null;
+    private String created_time = null;
     private ArrayList<Comment> comments;
 
-
-
     /* In case a User must be created manually */
-    public ModelImage(String username, String profilePhotoURL, String imgURL, String caption, Integer likes, Integer imgHeight, ArrayList<Comment> comments) {
+    public ModelImage(String username, String profilePhotoURL, String imgURL, String caption, Integer likes, Integer imgHeight, ArrayList<Comment> comments, String created_time) {
 
         this.username = username;
         this.profilePhotoURL = profilePhotoURL;
@@ -49,6 +49,7 @@ public class ModelImage {
         this.likes = likes;
         this.imgHeight = imgHeight;
         this.comments = comments;
+        this.created_time = created_time;
     }
 
     /* Port JSON user to Java Object */
@@ -65,9 +66,10 @@ public class ModelImage {
             this.likes = photo.getJSONObject("likes").getInt("count");
             JSONArray jsonComments = photo.getJSONObject("comments").getJSONArray("data");
             Integer count = photo.getJSONObject("comments").getInt("count");
-
+            String long_created_time = photo.getString("created_time");
+            // Specify creation date relative to now
+            this.created_time = DateUtils.getRelativeTimeSpanString(Long.parseLong(long_created_time) * 1000, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
             comments = new ArrayList<Comment>();
-
             // Let's retrieve last two comments
             if( count >= 2) {
                 for(int j = 1; j <= 2; j++) {
@@ -105,8 +107,11 @@ public class ModelImage {
     public Integer getImgHeight() {
         return imgHeight;
     }
-
     public ArrayList<Comment> getComments() {
         return comments;
+    }
+
+    public String getCreated_time() {
+        return created_time;
     }
 }
